@@ -80,7 +80,7 @@ def words_to_numbers(word_input):
                 #If the word hundred is not in the group, look for words that
                 #that it should be one digit longer
                 elif "hundred" not in CommaGroup and myword in ten_numbers:
-                    threes_group = threes_group + 1
+                    basenum = ten_numbers[myword]
                 
                 #Look for words indicating non-zero digits
                 elif "hundred" not in CommaGroup and myword in teens_digits:
