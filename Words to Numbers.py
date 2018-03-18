@@ -48,8 +48,8 @@ def words_to_numbers(word_input):
 
     #Set initial variables to 0
     NewStart = 0
-    threes_group = 0
-    basenum = 1
+    threes_group_list = []
+
     
     #Loop through the list of words
     for subword in word_list:
@@ -62,6 +62,8 @@ def words_to_numbers(word_input):
             print(CommaGroup)
             NewStart = CommaIndex
             
+            threes_group = 0
+            basenum = 1
             #Loop through the list of words in the three digit group
             for myword in CommaGroup:
                 print(myword)
@@ -69,14 +71,18 @@ def words_to_numbers(word_input):
                 #Is it the defining word of the three digit group 
                 if myword in power_of_ten:
                     threes_group = threes_group + power_of_ten[subword]
-                    #print(type(threes_group))
-                    #print(threes_group)
+
                 #If is is one hundred, we add two digits onto the length
                 elif myword == "hundred":
                     threes_group = threes_group + 2
                     print(threes_group)
+                
+                #If the word hundred is not in the group, look for words that
+                #that it should be one digit longer
                 elif "hundred" not in CommaGroup and myword in ten_numbers:
-                    threes_group = threes_group + 1                   
+                    threes_group = threes_group + 1
+                
+                #Look for words indicating non-zero digits
                 elif "hundred" not in CommaGroup and myword in teens_digits:
                     threes_group = threes_group + 1
                     basenum = teens_digits[myword]
@@ -84,5 +90,12 @@ def words_to_numbers(word_input):
                 elif myword in single_digits:   
                     basenum = single_digits[myword]
                     print(basenum)
-    print("final threes_group:", int(basenum*(10**threes_group)))
+            
+            #put the final number for each threes group in a list
+            print("final threes_group:", int(basenum*(10**threes_group)))
+            threes_group_list.append(int(basenum*(10**threes_group)))
+    
+    #Add all the numbers in the list together to get a final number
+    writtennum = sum(threes_group_list)
+    print(writtennum)
         #print(lengthdigit)
